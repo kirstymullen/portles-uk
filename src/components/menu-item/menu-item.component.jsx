@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import './menu-item.styles.scss';
 
 const MenuItem = ({title, imageUrl, size}) => (
-  <div className={`menu-item ${size}`}>
+  <div className={`menu-item ${size ?? 'small'}`}>
     <div
       style={{backgroundImage: `url(${imageUrl})`}}
       className='background-image'
