@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {Route, Switch} from 'react-router-dom';
+import {Route, Switch, Redirect} from 'react-router-dom';
 import {connect} from 'react-redux';
 import './App.css';
 
@@ -34,8 +34,13 @@ class App extends React.Component {
   }
 
   componentWillUnmount() {
-    this.unsubscribeFromAuth();
-    this.unsubscribeFromSnapShot();
+    if (this.unsubscribeFromAuth != null) {
+      this.unsubscribeFromAuth();
+    }
+
+    if (this.unsubscribeFromSnapShot != null) {
+      this.unsubscribeFromSnapShot();
+    }
   }
 
   render() {
@@ -44,15 +49,19 @@ class App extends React.Component {
         <Header />
         <div className='page-container'>
           <Switch>
-            <Route exact path='/'>
-              <HomePage />
-            </Route>
-            <Route path='/shop'>
-              <ShopPage />
-            </Route>
-            <Route path='/signin'>
-              <SignInOrRegister />
-            </Route>
+            <Route exact path='/' component={HomePage} />
+            <Route path='/shop' component={ShopPage} />
+            <Route
+              exact
+              path='/signin'
+              render={() =>
+                this.props.currentUser ? (
+                  <Redirect to='/' />
+                ) : (
+                  <SignInOrRegister />
+                )
+              }
+            />
           </Switch>
         </div>
       </div>
@@ -60,12 +69,16 @@ class App extends React.Component {
   }
 }
 
+const mapStateToProps = ({user}) => ({
+  currentUser: user.currentUser,
+});
 const mapDispatchToProps = dispatch => ({
   setCurrentUser: user => dispatch(setCurrentUser(user)),
 });
 
-export default connect(null, mapDispatchToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);
 
 App.propTypes = {
   setCurrentUser: PropTypes.func,
+  currentUser: PropTypes.object,
 };
