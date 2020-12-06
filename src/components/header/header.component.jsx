@@ -6,6 +6,8 @@ import {auth} from '../../firebase/firebase.utils';
 import {PropTypes} from 'prop-types';
 import {connect} from 'react-redux';
 
+import BasketIcon from '../basket-icon/basket-icon.component';
+
 const Header = ({currentUser}) => (
   <div className='header'>
     <Link className='logo-container' to='/'>
@@ -27,6 +29,7 @@ const Header = ({currentUser}) => (
           SIGN IN
         </Link>
       )}
+      <BasketIcon />
     </div>
   </div>
 );
