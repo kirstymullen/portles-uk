@@ -2,6 +2,7 @@ import {BasketActionTypes} from './basket.types';
 
 const INITIAL_STATE = {
   hidden: true,
+  basketItems: [],
 };
 
 const basketReducer = (state = INITIAL_STATE, action) => {
@@ -10,6 +11,15 @@ const basketReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         hidden: !state.hidden,
+      };
+    case BasketActionTypes.ADD_ITEM:
+      return {
+        ...state,
+        basketItems: [...state.basketItems, action.payload],
+      };
+    case BasketActionTypes.REMOVE_ITEM:
+      return {
+        ...state,
       };
     default:
       return state;
