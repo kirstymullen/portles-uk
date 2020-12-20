@@ -5,10 +5,11 @@ import {ReactComponent as Logo} from '../../assets/crown.svg';
 import {auth} from '../../firebase/firebase.utils';
 import {PropTypes} from 'prop-types';
 import {connect} from 'react-redux';
+import BasketDropDown from '../basket-dropdown/basket-dropdown.component';
 
 import BasketIcon from '../basket-icon/basket-icon.component';
 
-const Header = ({currentUser}) => (
+const Header = ({currentUser, hidden}) => (
   <div className='header'>
     <Link className='logo-container' to='/'>
       <Logo className='logo' />
@@ -31,15 +32,18 @@ const Header = ({currentUser}) => (
       )}
       <BasketIcon />
     </div>
+    {hidden ? null : <BasketDropDown />}
   </div>
 );
 
-const mapStateToProps = state => ({
-  currentUser: state.user.currentUser,
+const mapStateToProps = ({user: {currentUser}, basket: {hidden}}) => ({
+  currentUser,
+  hidden,
 });
 
 export default connect(mapStateToProps)(Header);
 
 Header.propTypes = {
   currentUser: PropTypes.object,
+  hidden: PropTypes.bool,
 };
