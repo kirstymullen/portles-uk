@@ -6,6 +6,7 @@ import './basket-dropdown.styles.scss';
 import {selectBasketItems} from '../../redux/basket/basket.selectors';
 import BasketItem from '../basket-item/basket-item.component';
 import {connect} from 'react-redux';
+import {createStructuredSelector} from 'reselect';
 
 const BasketDropDown = ({basketItems}) => (
   <div className='basket-dropdown'>
@@ -18,8 +19,8 @@ const BasketDropDown = ({basketItems}) => (
   </div>
 );
 
-const mapStateToProps = state => ({
-  basketItems: selectBasketItems(state),
+const mapStateToProps = createStructuredSelector({
+  basketItems: selectBasketItems,
 });
 
 export default connect(mapStateToProps)(BasketDropDown);

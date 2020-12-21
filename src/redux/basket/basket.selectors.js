@@ -15,3 +15,8 @@ export const selectBasketItemsTotalCount = createSelector(
       0
     )
 );
+
+export const selectBasketHidden = createSelector(
+  [selectBasket],
+  basket => basket.hidden
+);

@@ -7,6 +7,10 @@ import {PropTypes} from 'prop-types';
 import {connect} from 'react-redux';
 import BasketDropDown from '../basket-dropdown/basket-dropdown.component';
 
+import {createStructuredSelector} from 'reselect';
+import {selectCurrentUser} from '../../redux/user/user.selectors';
+import {selectBasketHidden} from '../../redux/basket/basket.selectors';
+
 import BasketIcon from '../basket-icon/basket-icon.component';
 
 const Header = ({currentUser, hidden}) => (
@@ -36,9 +40,9 @@ const Header = ({currentUser, hidden}) => (
   </div>
 );
 
-const mapStateToProps = ({user: {currentUser}, basket: {hidden}}) => ({
-  currentUser,
-  hidden,
+const mapStateToProps = createStructuredSelector({
+  currentUser: selectCurrentUser,
+  hidden: selectBasketHidden,
 });
 
 export default connect(mapStateToProps)(Header);

@@ -7,6 +7,7 @@ import {selectBasketItemsTotalCount} from '../../redux/basket/basket.selectors';
 
 import './basket-icon.styles.scss';
 import {ReactComponent as ShoppingIcon} from '../../assets/basket.svg';
+import {createStructuredSelector} from 'reselect';
 
 const BasketIcon = ({toggleBasketHidden, itemCount}) => (
   <div className='basket-icon' onClick={toggleBasketHidden}>
@@ -19,8 +20,8 @@ const mapDispatchToProps = dispatch => ({
   toggleBasketHidden: () => dispatch(toggleBasketHidden()),
 });
 
-const mapStateToProps = state => ({
-  itemCount: selectBasketItemsTotalCount(state),
+const mapStateToProps = createStructuredSelector({
+  itemCount: selectBasketItemsTotalCount,
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(BasketIcon);
