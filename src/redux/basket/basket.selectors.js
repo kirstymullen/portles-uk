@@ -20,3 +20,13 @@ export const selectBasketHidden = createSelector(
   [selectBasket],
   basket => basket.hidden
 );
+
+export const selectBasketTotalPrice = createSelector(
+  [selectBasketItems],
+  basketItems =>
+    basketItems.reduce(
+      (totalCount, basketItem) =>
+        totalCount + basketItem.price * basketItem.quantity,
+      0
+    )
+);
