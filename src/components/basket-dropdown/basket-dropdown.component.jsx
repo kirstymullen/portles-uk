@@ -8,9 +8,11 @@ import BasketItem from '../basket-item/basket-item.component';
 import {connect} from 'react-redux';
 import {createStructuredSelector} from 'reselect';
 
+import {toggleBasketHidden} from '../../redux/basket/basket.actions';
+
 import {withRouter} from 'react-router-dom';
 
-const BasketDropDown = ({basketItems, history}) => (
+const BasketDropDown = ({basketItems, history, dispatch}) => (
   <div className='basket-dropdown'>
     <div className='basket-items'>
       {basketItems.length > 0 ? (
@@ -21,7 +23,12 @@ const BasketDropDown = ({basketItems, history}) => (
         <span>Your basket is empty.</span>
       )}
     </div>
-    <CustomButton onClick={() => history.push('/checkout')}>
+    <CustomButton
+      onClick={() => {
+        history.push('/checkout');
+        dispatch(toggleBasketHidden());
+      }}
+    >
       GO TO CHECKOUT
     </CustomButton>
   </div>
@@ -36,4 +43,5 @@ export default withRouter(connect(mapStateToProps)(BasketDropDown));
 BasketDropDown.propTypes = {
   basketItems: PropTypes.array,
   history: PropTypes.object,
+  dispatch: PropTypes.func,
 };
