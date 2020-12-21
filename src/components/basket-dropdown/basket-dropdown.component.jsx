@@ -11,9 +11,13 @@ import {createStructuredSelector} from 'reselect';
 const BasketDropDown = ({basketItems}) => (
   <div className='basket-dropdown'>
     <div className='basket-items'>
-      {basketItems.map(basketItem => (
-        <BasketItem key={basketItem.id} item={basketItem} />
-      ))}
+      {basketItems.length > 0 ? (
+        basketItems.map(basketItem => (
+          <BasketItem key={basketItem.id} item={basketItem} />
+        ))
+      ) : (
+        <span>Your basket is empty.</span>
+      )}
     </div>
     <CustomButton>GO TO CHECKOUT</CustomButton>
   </div>
