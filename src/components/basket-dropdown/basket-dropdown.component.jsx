@@ -3,6 +3,7 @@ import CustomButton from '../custom-buttom/custom-button.component';
 import PropTypes from 'prop-types';
 import './basket-dropdown.styles.scss';
 
+import {selectBasketItems} from '../../redux/basket/basket.selectors';
 import BasketItem from '../basket-item/basket-item.component';
 import {connect} from 'react-redux';
 
@@ -17,8 +18,8 @@ const BasketDropDown = ({basketItems}) => (
   </div>
 );
 
-const mapStateToProps = ({basket: {basketItems}}) => ({
-  basketItems,
+const mapStateToProps = state => ({
+  basketItems: selectBasketItems(state),
 });
 
 export default connect(mapStateToProps)(BasketDropDown);
