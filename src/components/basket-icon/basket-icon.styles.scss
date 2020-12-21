@@ -1,6 +1,6 @@
 .basket-icon {
-  width: 45px;
-  height: 45px;
+  width: 36px;
+  height: 36px;
   position: relative;
   display: flex;
   align-items: center;
@@ -8,14 +8,24 @@
   cursor: pointer;
 
   .shopping-icon {
-    width: 30px;
-    height: 30px;
+    width: 36px;
+    height: 36px;
+    opacity: 0.7;
   }
 
   .item-count {
     position: absolute;
-    font-size: 10px;
+    font-size: small;
     font-weight: bold;
-    bottom: 12px;
+    top: 0;
+    right: 0;
+    width: 18px;
+    height: 18px;
+    border-radius: 9px;
+    color: white;
+    background: #bf360c;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 }

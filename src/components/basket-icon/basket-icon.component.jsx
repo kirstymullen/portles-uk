@@ -10,7 +10,7 @@ import {ReactComponent as ShoppingIcon} from '../../assets/basket.svg';
 const BasketIcon = ({toggleBasketHidden}) => (
   <div className='basket-icon' onClick={toggleBasketHidden}>
     <ShoppingIcon className='shopping-icon' />
-    <span className='item-count'></span>
+    <div className='item-count'>3</div>
   </div>
 );
 
