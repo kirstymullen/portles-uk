@@ -14,6 +14,20 @@ export const addItemToBasket = (existingBasketItems, newBasketItem) => {
   return [...existingBasketItems, {...newBasketItem, quantity: 1}];
 };
 
+export const decreaseItemQuantity = (existingBasketItems, basketItem) => {
+  const existingBasketItem = existingBasketItems.find(
+    item => item.id === basketItem.id
+  );
+
+  if (existingBasketItem.quantity === 1) {
+    return removeItemFromBasket(existingBasketItems, basketItem);
+  }
+
+  return existingBasketItems.map(item =>
+    item.id === basketItem.id ? {...item, quantity: item.quantity - 1} : item
+  );
+};
+
 export const removeItemFromBasket = (
   existingBasketItems,
   basketItemToRemove

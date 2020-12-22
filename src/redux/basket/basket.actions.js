@@ -9,6 +9,11 @@ export const addItem = item => ({
   payload: item,
 });
 
+export const decreaseItemQuantity = item => ({
+  type: BasketActionTypes.DECREASE_ITEM_QUANTITY,
+  payload: item,
+});
+
 export const removeItem = item => ({
   type: BasketActionTypes.REMOVE_ITEM,
   payload: item,
