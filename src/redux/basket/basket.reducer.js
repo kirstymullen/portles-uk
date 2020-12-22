@@ -1,5 +1,5 @@
 import {BasketActionTypes} from './basket.types';
-import {addItemToBasket} from './basket.utils';
+import {addItemToBasket, removeItemFromBasket} from './basket.utils';
 
 const INITIAL_STATE = {
   hidden: true,
@@ -21,6 +21,7 @@ const basketReducer = (state = INITIAL_STATE, action) => {
     case BasketActionTypes.REMOVE_ITEM:
       return {
         ...state,
+        basketItems: removeItemFromBasket(state.basketItems, action.payload),
       };
     default:
       return state;

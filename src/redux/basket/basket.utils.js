@@ -13,3 +13,10 @@ export const addItemToBasket = (existingBasketItems, newBasketItem) => {
 
   return [...existingBasketItems, {...newBasketItem, quantity: 1}];
 };
+
+export const removeItemFromBasket = (
+  existingBasketItems,
+  basketItemToRemove
+) => {
+  return existingBasketItems.filter(item => item.id !== basketItemToRemove.id);
+};
