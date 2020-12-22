@@ -3,6 +3,7 @@ import './checkout.styles.scss';
 import {connect} from 'react-redux';
 import {createStructuredSelector} from 'reselect';
 import {PropTypes} from 'prop-types';
+import CheckoutItem from '../../components/checkout-item/checkout-item.component';
 
 import {
   selectBasketItems,
@@ -28,7 +29,9 @@ const CheckoutPage = ({basketItems, totalPrice}) => (
         <span>Remove</span>
       </div>
     </div>
-    {basketItems.map(basketItem => basketItem.name)}
+    {basketItems.map(basketItem => (
+      <CheckoutItem key={basketItem.id} basketItem={basketItem} />
+    ))}
 
     <div className='total'>
       <span>TOTAL: £{totalPrice}</span>
