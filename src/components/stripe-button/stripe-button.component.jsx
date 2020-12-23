@@ -21,8 +21,8 @@ const StripeButton = ({price}) => {
         },
         body: JSON.stringify({
           price: priceForStripe,
-          successUrl: 'http://localhost:3000/checkout',
-          cancelUrl: 'http://localhost:3000/checkout',
+          successUrl: window.location.href,
+          cancelUrl: window.location.href,
         }),
       }
     );
