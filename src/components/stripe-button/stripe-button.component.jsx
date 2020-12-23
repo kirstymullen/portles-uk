@@ -12,7 +12,8 @@ const StripeButton = ({price}) => {
     const stripe = await loadStripe(publishableKey);
 
     const response = await fetch(
-      'http://localhost:4242/create-checkout-session',
+      //'http://localhost:4242/create-checkout-session',
+      'https://portles-uk-api.herokuapp.com/create-checkout-session',
       {
         method: 'POST',
         headers: {
