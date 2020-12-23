@@ -23,9 +23,28 @@
     }
   }
 
-  .total {
+  .total,
+  .checkout-button,
+  .test-card-details {
     margin-top: 30px;
     margin-left: auto;
+  }
+
+  .test-card-details {
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+    font-size: larger;
+    padding: 0 20px 20px;
+    background-color: #f8d7da;
+    border-radius: 0.25rem;
+
+    span {
+      color: red;
+      font-weight: bold;
+    }
+  }
+
+  .total {
     font-size: 36px;
   }
 }
