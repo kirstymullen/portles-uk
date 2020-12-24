@@ -1,11 +1,12 @@
 import React from 'react';
-import './homepage.styles.scss';
+import './homepage.styles';
 import Directory from '../../components/directory/directory.component';
+import {HomePageContaner} from './homepage.styles';
 
 const HomePage = () => (
-  <div className='homepage'>
+  <HomePageContaner>
     <Directory />
-  </div>
+  </HomePageContaner>
 );
 
 export default HomePage;
