@@ -7,7 +7,6 @@ import {
   OptionDiv,
 } from './header.styles';
 import {ReactComponent as Logo} from '../../assets/crown.svg';
-import {auth} from '../../firebase/firebase.utils';
 import {PropTypes} from 'prop-types';
 import {connect} from 'react-redux';
 import BasketDropDown from '../basket-dropdown/basket-dropdown.component';
@@ -16,9 +15,11 @@ import {createStructuredSelector} from 'reselect';
 import {selectCurrentUser} from '../../redux/user/user.selectors';
 import {selectBasketHidden} from '../../redux/basket/basket.selectors';
 
+import {signOutStart} from '../../redux/user/user.actions';
+
 import BasketIcon from '../basket-icon/basket-icon.component';
 
-const Header = ({currentUser, hidden}) => (
+const Header = ({currentUser, hidden, signOutStart}) => (
   <HeaderContainer>
     <LogoContainer to='/'>
       <Logo className='logo' />
@@ -27,7 +28,7 @@ const Header = ({currentUser, hidden}) => (
       <OptionLink to='/shop'>SHOP</OptionLink>
       <OptionLink to='/contact'>CONTACT</OptionLink>
       {currentUser ? (
-        <OptionDiv onClick={() => auth.signOut()}>SIGN OUT</OptionDiv>
+        <OptionDiv onClick={signOutStart}>SIGN OUT</OptionDiv>
       ) : (
         <OptionLink to='/signin'>SIGN IN</OptionLink>
       )}
@@ -42,9 +43,14 @@ const mapStateToProps = createStructuredSelector({
   hidden: selectBasketHidden,
 });
 
-export default connect(mapStateToProps)(Header);
+const mapDispatchToProps = dispatch => ({
+  signOutStart: () => dispatch(signOutStart()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header);
 
 Header.propTypes = {
   currentUser: PropTypes.object,
   hidden: PropTypes.bool,
+  signOutStart: PropTypes.func,
 };
