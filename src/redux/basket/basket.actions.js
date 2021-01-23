@@ -18,3 +18,7 @@ export const removeItem = item => ({
   type: BasketActionTypes.REMOVE_ITEM,
   payload: item,
 });
+
+export const clearBasket = () => ({
+  type: BasketActionTypes.CLEAR_BASKET,
+});

@@ -32,6 +32,11 @@ const basketReducer = (state = INITIAL_STATE, action) => {
         ...state,
         basketItems: removeItemFromBasket(state.basketItems, action.payload),
       };
+    case BasketActionTypes.CLEAR_BASKET:
+      return {
+        ...state,
+        basketItems: [],
+      };
     default:
       return state;
   }
