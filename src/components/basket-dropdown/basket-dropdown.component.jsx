@@ -10,38 +10,40 @@ import {createStructuredSelector} from 'reselect';
 
 import {toggleBasketHidden} from '../../redux/basket/basket.actions';
 
-import {withRouter} from 'react-router-dom';
+import {useHistory} from 'react-router-dom';
 
-const BasketDropDown = ({basketItems, history, dispatch}) => (
-  <div className='basket-dropdown'>
-    <div className='basket-items'>
-      {basketItems.length > 0 ? (
-        basketItems.map(basketItem => (
-          <BasketItem key={basketItem.id} item={basketItem} />
-        ))
-      ) : (
-        <span>Your basket is empty.</span>
-      )}
+const BasketDropDown = ({basketItems, dispatch}) => {
+  const history = useHistory();
+  return (
+    <div className='basket-dropdown'>
+      <div className='basket-items'>
+        {basketItems.length > 0 ? (
+          basketItems.map(basketItem => (
+            <BasketItem key={basketItem.id} item={basketItem} />
+          ))
+        ) : (
+          <span>Your basket is empty.</span>
+        )}
+      </div>
+      <CustomButton
+        onClick={() => {
+          history.push('/checkout');
+          dispatch(toggleBasketHidden());
+        }}
+      >
+        GO TO CHECKOUT
+      </CustomButton>
     </div>
-    <CustomButton
-      onClick={() => {
-        history.push('/checkout');
-        dispatch(toggleBasketHidden());
-      }}
-    >
-      GO TO CHECKOUT
-    </CustomButton>
-  </div>
-);
+  );
+};
 
 const mapStateToProps = createStructuredSelector({
   basketItems: selectBasketItems,
 });
 
-export default withRouter(connect(mapStateToProps)(BasketDropDown));
+export default connect(mapStateToProps)(BasketDropDown);
 
 BasketDropDown.propTypes = {
   basketItems: PropTypes.array,
-  history: PropTypes.object,
   dispatch: PropTypes.func,
 };
