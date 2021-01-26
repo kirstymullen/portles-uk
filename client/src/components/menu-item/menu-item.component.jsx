@@ -1,10 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {useHistory} from 'react-router-dom';
+import {useHistory, useRouteMatch} from 'react-router-dom';
 import './menu-item.styles.scss';
 
-const MenuItem = ({title, imageUrl, size, match, linkUrl}) => {
+const MenuItem = ({title, imageUrl, size, linkUrl}) => {
   const history = useHistory();
+  const match = useRouteMatch();
   return (
     <div
       className={`menu-item ${size ?? 'small'}`}
@@ -29,6 +30,5 @@ MenuItem.propTypes = {
   title: PropTypes.string,
   imageUrl: PropTypes.string,
   size: PropTypes.string,
-  match: PropTypes.object,
   linkUrl: PropTypes.string,
 };
