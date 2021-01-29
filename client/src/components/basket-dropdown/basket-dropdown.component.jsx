@@ -1,19 +1,20 @@
 import React from 'react';
 import CustomButton from '../custom-buttom/custom-button.component';
-import PropTypes from 'prop-types';
 import './basket-dropdown.styles.scss';
 
 import {selectBasketItems} from '../../redux/basket/basket.selectors';
 import BasketItem from '../basket-item/basket-item.component';
-import {connect} from 'react-redux';
-import {createStructuredSelector} from 'reselect';
+import {useSelector, useDispatch} from 'react-redux';
 
 import {toggleBasketHidden} from '../../redux/basket/basket.actions';
 
 import {useHistory} from 'react-router-dom';
 
-const BasketDropDown = ({basketItems, dispatch}) => {
+const BasketDropDown = () => {
+  const dispatch = useDispatch();
   const history = useHistory();
+  const basketItems = useSelector(selectBasketItems);
+
   return (
     <div className='basket-dropdown'>
       <div className='basket-items'>
@@ -37,13 +38,4 @@ const BasketDropDown = ({basketItems, dispatch}) => {
   );
 };
 
-const mapStateToProps = createStructuredSelector({
-  basketItems: selectBasketItems,
-});
-
-export default connect(mapStateToProps)(BasketDropDown);
-
-BasketDropDown.propTypes = {
-  basketItems: PropTypes.array,
-  dispatch: PropTypes.func,
-};
+export default BasketDropDown;

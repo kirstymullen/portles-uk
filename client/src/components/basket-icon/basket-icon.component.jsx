@@ -1,32 +1,26 @@
-import React from 'react';
-import {PropTypes} from 'prop-types';
-import {connect} from 'react-redux';
+import React, {useCallback} from 'react';
+import {useSelector, useDispatch} from 'react-redux';
 
 import {toggleBasketHidden} from '../../redux/basket/basket.actions';
 import {selectBasketItemsTotalCount} from '../../redux/basket/basket.selectors';
 
 import './basket-icon.styles.scss';
 import {ReactComponent as ShoppingIcon} from '../../assets/basket.svg';
-import {createStructuredSelector} from 'reselect';
 
-const BasketIcon = ({toggleBasketHidden, itemCount}) => (
-  <div className='basket-icon' onClick={toggleBasketHidden}>
-    <ShoppingIcon className='shopping-icon' />
-    {itemCount > 0 ? <div className='item-count'>{itemCount}</div> : null}
-  </div>
-);
+const BasketIcon = () => {
+  const dispatch = useDispatch();
+  const toggleBasketHiddenCallback = useCallback(
+    () => dispatch(toggleBasketHidden()),
+    [dispatch]
+  );
+  const itemCount = useSelector(selectBasketItemsTotalCount);
 
-const mapDispatchToProps = dispatch => ({
-  toggleBasketHidden: () => dispatch(toggleBasketHidden()),
-});
-
-const mapStateToProps = createStructuredSelector({
-  itemCount: selectBasketItemsTotalCount,
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(BasketIcon);
-
-BasketIcon.propTypes = {
-  toggleBasketHidden: PropTypes.func,
-  itemCount: PropTypes.number,
+  return (
+    <div className='basket-icon' onClick={toggleBasketHiddenCallback}>
+      <ShoppingIcon className='shopping-icon' />
+      {itemCount > 0 ? <div className='item-count'>{itemCount}</div> : null}
+    </div>
+  );
 };
+
+export default BasketIcon;
