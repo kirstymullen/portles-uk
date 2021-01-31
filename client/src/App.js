@@ -2,13 +2,14 @@ import React, {useEffect} from 'react';
 import PropTypes from 'prop-types';
 import {Route, Switch, Redirect} from 'react-router-dom';
 import {connect, useSelector} from 'react-redux';
-import './App.css';
 
 import HomePage from './pages/homepage/homepage.component';
 import ShopPage from './pages/shop/shop.component';
 import CheckoutPage from './pages/checkout/checkout.component';
 import SignInOrRegister from './pages/sign-in-or-register/sign-in-or-register.component';
 import Header from './components/header/header.component';
+
+import {GlobalStyle} from './global.styles';
 
 import {checkUserSession} from './redux/user/user.actions';
 import {selectCurrentUser} from './redux/user/user.selectors';
@@ -22,6 +23,7 @@ const App = ({checkUserSession}) => {
 
   return (
     <div>
+      <GlobalStyle />
       <Header />
       <div className='page-container'>
         <Switch>
